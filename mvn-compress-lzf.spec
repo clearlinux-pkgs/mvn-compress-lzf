@@ -4,14 +4,19 @@
 #
 Name     : mvn-compress-lzf
 Version  : 1.0.3
-Release  : 1
+Release  : 2
 URL      : https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.jar
 Source0  : https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.jar
-Source1  : https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.pom
+Source1  : https://repo1.maven.org/maven2/com/ning/compress-lzf/0.8.4/compress-lzf-0.8.4.jar
+Source2  : https://repo1.maven.org/maven2/com/ning/compress-lzf/0.8.4/compress-lzf-0.8.4.pom
+Source3  : https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.2/compress-lzf-1.0.2.jar
+Source4  : https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.2/compress-lzf-1.0.2.pom
+Source5  : https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: mvn-compress-lzf-data = %{version}-%{release}
+Requires: mvn-compress-lzf-license = %{version}-%{release}
 
 %description
 No detailed description available
@@ -24,16 +29,40 @@ Group: Data
 data components for the mvn-compress-lzf package.
 
 
+%package license
+Summary: license components for the mvn-compress-lzf package.
+Group: Default
+
+%description license
+license components for the mvn-compress-lzf package.
+
+
 %prep
+%setup -q -n META-INF
 
 %build
 
 %install
+mkdir -p %{buildroot}/usr/share/package-licenses/mvn-compress-lzf
+cp LICENSE %{buildroot}/usr/share/package-licenses/mvn-compress-lzf/LICENSE
+cp NOTICE %{buildroot}/usr/share/package-licenses/mvn-compress-lzf/NOTICE
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.3
-cp %{SOURCE0} %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.3
+cp %{SOURCE0} %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/0.8.4
+cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/0.8.4/compress-lzf-0.8.4.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/0.8.4
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/0.8.4/compress-lzf-0.8.4.pom
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.2
+cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.2/compress-lzf-1.0.2.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.2
+cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.2/compress-lzf-1.0.2.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.3
-cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.3
+cp %{SOURCE5} %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.pom
 
 
 %files
@@ -41,5 +70,14 @@ cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/com/ning/compress-lzf/1
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/java/.m2/repository/com/ning/compress-lzf/0.8.4/compress-lzf-0.8.4.jar
+/usr/share/java/.m2/repository/com/ning/compress-lzf/0.8.4/compress-lzf-0.8.4.pom
+/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.2/compress-lzf-1.0.2.jar
+/usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.2/compress-lzf-1.0.2.pom
 /usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.jar
 /usr/share/java/.m2/repository/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.pom
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mvn-compress-lzf/LICENSE
+/usr/share/package-licenses/mvn-compress-lzf/NOTICE
